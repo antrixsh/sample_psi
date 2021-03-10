@@ -1,0 +1,67 @@
+Download Flume Binary from below link
+https://drive.google.com/open?id=1KbblRsQ-YbWhwYJVYbB0pl15yhMEnFbA
+Untar the same and rename the same by flume and copy the same in home directory.
+=========================================================
+Add the path in ~/.bashrc_profile as specified below. and run your bashrc_profile
+export FLUME_HOME=$HOME/flume
+export PATH=$PATH:$FLUME_HOME/bin
+=========================================================
+Create spool to log property file (New File)as specied below and change the path with your system values (Will explain in class)
+Save the file with the name spool-to-logger.properties
+
+agent1.sources =source1
+agent1.sinks = sink1
+agent1.channels = channel1
+
+agent1.sources.source1.channels = channel1
+agent1.sinks.sink1.channel = channel1
+
+agent1.sources.source1.type = spooldir
+agent1.sources.source1.spoolDir = /home/antrixsh/spooldir
+
+agent1.sinks.sink1.type = logger
+agent1.channels.channel1.type = file
+==========================================================
+Next Steps Will explain in class. (How to run Spool to logger through Command line)
+Command to run flume agent
+
+flume-ng agent --conf-file spool-to-logger.properties --name agent1 -Dflume.root.logger=WARN,console
+==========================================================
+Now In earlier steps we stream the data into our terminal. 
+Now in below steps we copy our data into HDFS.
+
+All setp will be same only .properties file will be chnaged.
+Create hdfs to log property file (New File)as specied below and change the path with your system values (Will explain in class)
+Save the file with the name spool-to-hdfs.properties
+======
+agent1.sources =source1
+agent1.sinks = sink1
+agent1.channels = channel1
+
+agent1.sources.source1.channels = channel1
+agent1.sinks.sink1.channel = channel1
+
+agent1.sources.source1.type = spooldir
+agent1.sources.source1.spoolDir = /home/antrixsh/spooldir
+
+agent1.sinks.sink1.type = hdfs
+agent1.sinks.sink1.hdfs.path = /tmp/flume
+agent1.sinks.sink1.hdfs.filePrefix = events
+agent1.sinks.sink1.hdfs.fileSuffix = .log
+agent1.sinks.sink1.hdfs.inUsePrefix = _
+agent1.sinks.sink1.hdfs.fileType = DataStream
+
+agent1.channels.channel1.type = file
+==========================================================
+Next Steps Will explain in class. (How to run Spool to logger through Command line)
+Command to run flume agent
+
+flume-ng agent --conf-file spool-to-hdfs.properties --name agent1 -Dflume.root.logger=WARN,console
+==========================================================
+
+
+
+
+
+
+

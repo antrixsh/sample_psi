@@ -1,0 +1,56 @@
+Sqoop Installation
+Download Sqoop Binary From below link untar/unzip it and rename to sqoop and copy into your home directory
+https://drive.google.com/open?id=1XFx3pGcfW-VcqIng--v03khnW7CZNWYc
+=======
+Download My sql Connector from below link
+https://drive.google.com/open?id=12HtTbHz9D97QW_DAoPN4mABziautxEkJ
+Untar and copy mysql-connector-java-5.1.30-bin.jar to $SQOOP_HOME/lib
+========================================================================
+Download MYSQL before procedding the further steps.
+#sudo apt-get install mysql-server mysql-client mysql-common 
+#Wait few seconds enter password for root let example password password 
+#Wait few minutes 
+#check mysql installed or not? 
+dpkg --get-selections | grep mysql
+=====================================================
+In bash profile 
+export SQOOP_HOME=$HOME/sqoop
+export PATH=$PATH:$SQOOP_HOME/bin
+
+restart bash profile means run below command
+source ~/.bashrc_profile
+
+$ cd $SQOOP_HOME/conf
+$ mv sqoop-env-template.sh sqoop-env.sh
+
+Open sqoop-env.sh by using below command 
+nano sqoop-env.sh
+and edit the following lines: as per below screenshot and change it with your credentials
+
+#Set path to where bin/hadoop is available
+export HADOOP_COMMON_HOME=/home/antrixsh/hadoop-2.7.3
+
+#Set path to where hadoop-*-core.jar is available
+export HADOOP_MAPRED_HOME=/home/antrixsh/hadoop-2.7.3
+=========================================================
+
+Run your Mysql by using below command
+mysql -u root -p
+enetr your passowrd which you set @ the time of MYSQL Server Installation
+========================================================
+Create Database <Your Database name>;
+Use Database <Your Database name>;
+create table by using below command.
+mysql> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
+    -> species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+	
+mysql> SHOW TABLES;
+
+mysql> DESCRIBE pet;
+
+mysql> INSERT INTO pet
+    -> VALUES ('Puffball','Diane','hamster','f','1999-03-30',NULL);
+============================================================
+Open another terminal 
+and write below code.
+sqoop import --connect jdbc:mysql://localhost:3306/sqoopdemo --username=root --password=<Your Password which you use at the time of installation of mysql> --table=pet --target-dir /ntrx  --m 1
