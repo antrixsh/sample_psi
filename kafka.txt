@@ -1,0 +1,50 @@
+How to work with KAFKA
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Step 1
+Downaod the kafka_2.10-0.10.1.1.tgz from apache kafka site. put this download file in aany place like  clousera home
+https://drive.google.com/open?id=1k1rheLQy0PpBP-Hlfr7FiT0xWijLATBN
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Step 2
+extract this tar file using this command in terminal
+tar -xvzf kafka_2.10-0.10.1.1.tgz
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step 3
+start the zookeeper
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Step 4
+start the Kafka broker
+
+open the other terminal and type this command
+bin/kafka-server-start.sh config/server.properties
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+step 5
+create the topic and partion(Optional we not provide here then kafka automatically provide the topic)
+
+open the other terminal and type
+bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic myfirstTopic1 --partitions 2 --replication-factor 1
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Step 6
+start the producer services
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic myfirstTopic1
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Step 7
+Start the consumer services
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic myfirstTopic1
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Output 
+
+type the message in producer terminal we can see the message will reach to counsumer tirminal
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
